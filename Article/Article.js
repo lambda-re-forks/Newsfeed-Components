@@ -3,18 +3,30 @@
 class Article {
   constructor(domElement) {
     // assign this.domElement to the passed in domElement
-    this.domElement;
-    // create a reference to the ".expandButton" class. 
-    this.expandButton;
+    this.domElement = domElement;
+    // create a reference to the ".expandButton" class.
+    this.expandButton = domElement.querySelector(".expandButton");
     // Using your expandButton reference, update the text on your expandButton to say "expand"
-    
+    this.expandButton.textContent = "Click to Expand";
     // Set a click handler on the expandButton reference, calling the expandArticle method.
-    
+    this.expandButton.addEventListener("click", () => this.expandArticle());
+    this.height = Array.from(this.domElement.children).reduce((acc, val) => {
+      const mt = parseInt(window.getComputedStyle(val)["margin-top"] || 0);
+      const mb = parseInt(window.getComputedStyle(val)["margin-bottom"] || 0);
+      return acc + val.offsetHeight + mt;
+    }, 0);
   }
 
   expandArticle() {
     // Using our reference to the domElement, toggle a class to expand or hide the article.
-
+    // this.domElement.classList.toggle("article-open");
+    if (window.getComputedStyle(this.domElement).height === "50px") {
+      this.expandButton.textContent = "Click to Close";
+      TweenMax.to(this.domElement, 1, { height: this.height });
+    } else {
+      this.expandButton.textContent = "Click to Expand";
+      TweenMax.to(this.domElement, 1, { height: "50px" });
+    }
   }
 }
 
@@ -26,4 +38,5 @@ class Article {
 
 */
 
-let articles;
+const articles = document.querySelectorAll(".article");
+articles.forEach(article => new Article(article));

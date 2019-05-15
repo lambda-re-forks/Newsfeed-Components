@@ -1,5 +1,6 @@
 .articles {
   margin-top: 95px;
+  min-height: @height;
 }
 .article {
   margin: 20px 10%;
@@ -11,7 +12,12 @@
   height: 50px;
   overflow: hidden;
   box-shadow: 2px 2px 2px lightgrey;
+  position: relative;
 
+  // transition: height 1s;
+  // p {
+  //   display: none;
+  // }
   h2 {
     font-size: 28px;
     padding: 0;
@@ -38,13 +44,13 @@
     cursor: pointer;
     transform: translate(-50%);
     background-color: white;
+    text-align: center;
   }
 }
 
 .article-open {
-  height: 400px;
+  // height: auto;
+  // p {
+  //   display: block;
+  // }
 }
-
-
-
-
